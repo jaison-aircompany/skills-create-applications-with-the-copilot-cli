@@ -5,7 +5,15 @@
 // Includes example-based tests (from calc-basic-operations.png) and
 // edge cases such as division by zero, negatives, and decimals.
 
-const { add, subtract, multiply, divide } = require('../calculator');
+const {
+  add,
+  subtract,
+  multiply,
+  divide,
+  modulo,
+  power,
+  squareRoot,
+} = require('../calculator');
 
 describe('add', () => {
   // Example from calc-basic-operations.png: 2 + 3
@@ -97,5 +105,71 @@ describe('divide', () => {
   // Edge case: division by zero must be handled gracefully.
   test('throws an error when dividing by zero', () => {
     expect(() => divide(5, 0)).toThrow('Division by zero is not allowed.');
+  });
+});
+
+describe('modulo', () => {
+  test('returns the remainder of two positive numbers', () => {
+    expect(modulo(10, 3)).toBe(1);
+  });
+
+  test('returns 0 when evenly divisible', () => {
+    expect(modulo(9, 3)).toBe(0);
+  });
+
+  test('handles negative dividends', () => {
+    expect(modulo(-10, 3)).toBe(-1);
+  });
+
+  test('handles decimal operands', () => {
+    expect(modulo(5.5, 2)).toBeCloseTo(1.5);
+  });
+
+  // Edge case: modulo by zero must be handled gracefully.
+  test('throws an error when modulo by zero', () => {
+    expect(() => modulo(5, 0)).toThrow('Modulo by zero is not allowed.');
+  });
+});
+
+describe('power', () => {
+  test('raises a number to a positive exponent', () => {
+    expect(power(2, 3)).toBe(8);
+  });
+
+  test('raises a number to the power of 0', () => {
+    expect(power(5, 0)).toBe(1);
+  });
+
+  test('raises a number to a negative exponent', () => {
+    expect(power(2, -2)).toBeCloseTo(0.25);
+  });
+
+  test('raises a negative base to an even exponent', () => {
+    expect(power(-2, 2)).toBe(4);
+  });
+
+  test('raises a number to a decimal exponent', () => {
+    expect(power(4, 0.5)).toBeCloseTo(2);
+  });
+});
+
+describe('squareRoot', () => {
+  test('returns the square root of a perfect square', () => {
+    expect(squareRoot(9)).toBe(3);
+  });
+
+  test('returns the square root of a non-perfect square', () => {
+    expect(squareRoot(2)).toBeCloseTo(1.4142135);
+  });
+
+  test('returns 0 for the square root of 0', () => {
+    expect(squareRoot(0)).toBe(0);
+  });
+
+  // Edge case: square root of a negative number must be handled gracefully.
+  test('throws an error for negative input', () => {
+    expect(() => squareRoot(-4)).toThrow(
+      'Square root of a negative number is not supported.'
+    );
   });
 });
