@@ -1,0 +1,13 @@
+{
+  "name": "skills-create-applications-with-the-copilot-cli",
+  "version": "1.0.0",
+  "description": "A simple Node.js CLI calculator supporting addition, subtraction, multiplication, and division.",
+  "main": "src/index.js",
+  "bin": {
+    "calculator": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "license": "MIT"
+}
